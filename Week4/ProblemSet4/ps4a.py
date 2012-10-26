@@ -278,34 +278,51 @@ def playHand(hand, wordList, n):
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     
 
-###
-### Problem #5: Playing a game
-### 
-##
-##def playGame(wordList):
-##    """
-##    Allow the user to play an arbitrary number of hands.
-##
-##    1) Asks the user to input 'n' or 'r' or 'e'.
-##      * If the user inputs 'n', let the user play a new (random) hand.
-##      * If the user inputs 'r', let the user play the last hand again.
-##      * If the user inputs 'e', exit the game.
-##      * If the user inputs anything else, ask them again.
-## 
-##    2) When done playing the hand, repeat from step 1    
-##    """
-##    # TO DO ... <-- Remove this comment when you code this function
-##    print "playGame not yet implemented." # <-- Remove this line when you code the function
-##   
-##
-##
-##
+#
+# Problem #5: Playing a game
+# 
+
+def playGame(wordList):
+    """
+    Allow the user to play an arbitrary number of hands.
+
+    1) Asks the user to input 'n' or 'r' or 'e'.
+      * If the user inputs 'n', let the user play a new (random) hand.
+      * If the user inputs 'r', let the user play the last hand again.
+      * If the user inputs 'e', exit the game.
+      * If the user inputs anything else, ask them again.
+ 
+    2) When done playing the hand, repeat from step 1    
+    """
+    hand_c = {}
+    command = ""
+    
+    while command != str('e'):
+        command = str(raw_input("Enter n to deal a new hand, r to replay the last hand, or e to end game: "))
+        if command == str('n'):
+            hand = dealHand(HAND_SIZE)
+            hand_c = hand.copy()
+            playHand(hand, wordList, HAND_SIZE)
+            print
+        elif command == str('r'):
+            if hand_c:
+                hand = hand_c.copy()
+                playHand(hand, wordList, HAND_SIZE)
+                print
+            else:
+                print "You have not played a hand yet. Please play a new hand first!"
+        elif command == str('e'):
+            break
+        else:
+            print "Invalid command."
+
 ###
 ### Build data structures used for entire session and play game
 ###
-##if __name__ == '__main__':
-##    wordList = loadWords()
-##    playGame(wordList)
+ 
+if __name__ == '__main__':
+    wordList = loadWords()
+    playGame(wordList)
 
-wordList = loadWords()
-playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
+
+
