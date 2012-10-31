@@ -41,7 +41,19 @@ def x_ian(x, word):
     word: a string
     returns: True if word is x_ian, False otherwise
     """
-    ###TODO.
+    if x == word:
+        return True
+    if len(x) > len(word):
+        return False
+    if len(x) == 0:
+        return True
+    # compare the first character of each
+    if x[0] == word[0]:
+        # if equal recurse passing x[1:] and word[1:]
+        return x_ian(x[1:], word[1:])
+    # if not recurse passing x and word[1:]
+    else:
+        return x_ian(x, word[1:])
 
 #
 # Problem 5: Typewriter
