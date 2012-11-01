@@ -69,4 +69,10 @@ def insertNewlines(text, lineLength):
         the next word.
     returns: a string, with newline characters inserted appropriately. 
     """
-    ### TODO.
+    if len(text) < lineLength:
+        return text
+    if text[lineLength-1:].find(' ') >= 0:
+        new_line = text[text[lineLength-1:].find(' ') + lineLength:]
+        return text[:text[lineLength-1:].find(' ') + lineLength] + '\n' + insertNewlines(new_line, lineLength)
+    if text[lineLength-1:].find(' ') < 0:
+        return text 
