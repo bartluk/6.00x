@@ -143,7 +143,8 @@ class AndTrigger(Trigger):
         return self.trigger2
 
     def evaluate(self, story):
-        return self.getTrigger1().evaluate(story) and self.getTrigger2().evaluate(story)
+        return (self.getTrigger1().evaluate(story) 
+                and self.getTrigger2().evaluate(story))
 
 
 class OrTrigger(Trigger):
@@ -158,7 +159,8 @@ class OrTrigger(Trigger):
         return self.trigger2
 
     def evaluate(self, story):
-        return self.getTrigger1().evaluate(story) or self.getTrigger2().evaluate(story)
+        return (self.getTrigger1().evaluate(story) 
+                or self.getTrigger2().evaluate(story))
 
 class PhraseTrigger(Trigger):
     def __init__(self, phrase):
@@ -168,11 +170,14 @@ class PhraseTrigger(Trigger):
         return self.phrase
 
     def evaluate(self, story):
+        phrase = self.getPhrase()
         title = story.getTitle()
         subject = story.getSubject()
         summary = story.getSummary()
 
-        return self.getPhrase() in title or self.getPhrase() in subject or self.getPhrase() in summary
+        return (phrase in title 
+                or phrase in subject 
+                or phrase in summary)
 
 #======================
 # Part 3
@@ -213,7 +218,31 @@ def makeTrigger(triggerMap, triggerType, params, name):
 
     Returns: None
     """
-    # TODO: Problem 11
+    if triggerType == "TITLE":
+        trigger = TitleTrigger(params[0])
+
+    elif triggerType == "SUBJECT":
+        trigger = SubjectTrigger(params[0])
+
+    elif triggerType == "SUMMARY":
+        trigger = SummaryTrigger(params[0])
+
+    elif triggerType == "PHRASE":
+        trigger = PhraseTrigger(params[0])
+
+    elif triggerType == "NOT":
+        trigger = NotTrigger(triggerMap[params[0]])
+
+    elif triggerType == "OR":
+        trigger = OrTrigger(triggerMap[params[0]], triggerMap[params[1]])
+
+    elif triggerType == "AND":
+        trigger = AndTrigger(triggerMap[params[0]], triggerMap[params[1]])
+
+    else:
+        return None
+
+    triggerMap[name] = trigger
 
 
 def readTriggerConfig(filename):
@@ -273,7 +302,7 @@ def main_thread(master):
         
         # TODO: Problem 11
         # After implementing makeTrigger, uncomment the line below:
-        # triggerlist = readTriggerConfig("triggers.txt")
+        triggerlist = readTriggerConfig("triggers.txt")
 
         # from here is about drawing
         frame = Frame(master)

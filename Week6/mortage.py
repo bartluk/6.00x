@@ -2,7 +2,7 @@ def findPayment(loan, r, m):
     """Assumes: loan and r are floats, m an int
     Returns the monthly payment for a mortgage of size
     loan at a monthly rate of r for m months"""
-    return loan*((r*(1+r) **m)/((1+r)**m - 1))
+    return loan*((r*(1+r)**m)/((1+r)**m-1))
 class Mortgage(object):
     """Abstract class for building different kinds of mortgages"""
     def __init__(self, loan, annRate, months):
