@@ -293,12 +293,12 @@ def main_thread(master):
         button.pack(side=BOTTOM)
         guidShown = []
         def get_cont(newstory):
-            if newstory.get_guid() not in guidShown:
-                cont.insert(END, newstory.get_title()+"\n", "title")
+            if newstory.getGuid() not in guidShown:
+                cont.insert(END, newstory.getTitle()+"\n", "title")
                 cont.insert(END, "\n---------------------------------------------------------------\n", "title")
-                cont.insert(END, newstory.get_summary())
+                cont.insert(END, newstory.getSummary())
                 cont.insert(END, "\n*********************************************************************\n", "title")
-                guidShown.append(newstory.get_guid())
+                guidShown.append(newstory.getGuid())
 
         while True:
 
