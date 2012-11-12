@@ -228,7 +228,8 @@ def makeTrigger(triggerMap, triggerType, params, name):
         trigger = SummaryTrigger(params[0])
 
     elif triggerType == "PHRASE":
-        trigger = PhraseTrigger(params[0])
+        phrase = " ".join(params)
+        trigger = PhraseTrigger(phrase)
 
     elif triggerType == "NOT":
         trigger = NotTrigger(triggerMap[params[0]])
@@ -243,6 +244,8 @@ def makeTrigger(triggerMap, triggerType, params, name):
         return None
 
     triggerMap[name] = trigger
+
+    return trigger
 
 
 def readTriggerConfig(filename):
@@ -274,6 +277,8 @@ def readTriggerConfig(filename):
 
         # Making a new trigger
         if linesplit[0] != "ADD":
+        # makeTrigger(triggerMap, triggerType, params, name)
+
             trigger = makeTrigger(triggerMap, linesplit[1],
                                   linesplit[2:], linesplit[0])
 
@@ -294,11 +299,11 @@ def main_thread(master):
     # this with something more configurable in Problem 11
     try:
         # These will probably generate a few hits...
-        t1 = TitleTrigger("Obama")
-        t2 = SubjectTrigger("Romney")
-        t3 = PhraseTrigger("Election")
-        t4 = OrTrigger(t2, t3)
-        triggerlist = [t1, t4]
+        # t1 = TitleTrigger("Obama")
+        # t2 = SubjectTrigger("Romney")
+        # t3 = PhraseTrigger("Election")
+        # t4 = OrTrigger(t2, t3)
+        # triggerlist = [t1, t4]
         
         # TODO: Problem 11
         # After implementing makeTrigger, uncomment the line below:
