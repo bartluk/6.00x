@@ -219,33 +219,31 @@ def makeTrigger(triggerMap, triggerType, params, name):
     Returns: None
     """
     if triggerType == "TITLE":
-        trigger = TitleTrigger(params[0])
+        triggerMap[name] = TitleTrigger(params[0])
 
     elif triggerType == "SUBJECT":
-        trigger = SubjectTrigger(params[0])
+        triggerMap[name] = SubjectTrigger(params[0])
 
     elif triggerType == "SUMMARY":
-        trigger = SummaryTrigger(params[0])
+        triggerMap[name] = SummaryTrigger(params[0])
 
     elif triggerType == "PHRASE":
         phrase = " ".join(params)
-        trigger = PhraseTrigger(phrase)
+        triggerMap[name] = PhraseTrigger(phrase)
 
     elif triggerType == "NOT":
-        trigger = NotTrigger(triggerMap[params[0]])
+        triggerMap[name] = NotTrigger(triggerMap[params[0]])
 
     elif triggerType == "OR":
-        trigger = OrTrigger(triggerMap[params[0]], triggerMap[params[1]])
+        triggerMap[name] = OrTrigger(triggerMap[params[0]], triggerMap[params[1]])
 
     elif triggerType == "AND":
-        trigger = AndTrigger(triggerMap[params[0]], triggerMap[params[1]])
+        triggerMap[name] = AndTrigger(triggerMap[params[0]], triggerMap[params[1]])
 
     else:
         return None
 
-    triggerMap[name] = trigger
-
-    return trigger
+    return triggerMap[name]
 
 
 def readTriggerConfig(filename):
@@ -362,4 +360,3 @@ if __name__ == '__main__':
     root.title("Some RSS parser")
     thread.start_new_thread(main_thread, (root,))
     root.mainloop()
-
