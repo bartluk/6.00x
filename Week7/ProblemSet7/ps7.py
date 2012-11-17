@@ -317,7 +317,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
         anim.done()
     return time_steps/num_trials
 
-#print runSimulation(10, 1.0, 30, 30, 1, 3, StandardRobot)
+#print runSimulation(20, 1.0, 20, 20, 1, 3, StandardRobot)
 
     #raise NotImplementedError
 
