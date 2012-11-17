@@ -97,8 +97,9 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        temp = (int(math.floor(pos.getX()/1)), int(math.floor(pos.getY()/1)))
-        self.getRoom()[temp] = True
+        x = math.floor(pos.getX())
+        y = math.floor(pos.getY())
+        self.getRoom()[(x, y)] = True
         return self.room
 
     def isTileCleaned(self, m, n):
